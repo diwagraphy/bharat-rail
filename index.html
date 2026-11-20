@@ -4,9 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>Bharat Rail: Pune–Darbhanga Express — Playable Prototype</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Hind:wght@400;500;600;700&family=Yatra+One&family=DotGothic16&display=swap" rel="stylesheet">
+<link href="fonts.css" rel="stylesheet">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#183062">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bharat Rail">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
 <style>
 /* Design tokens — Indian Railways working palette
    desk:     #2F3B41 painted loco-cab metal (structure)
@@ -285,6 +290,7 @@ button:focus-visible{outline:2px solid var(--board);outline-offset:2px}
         <div class="ln"><span>Train 11033 · Loco pilot</span><span>8 legs</span></div>
         <button class="primary" id="bStart">Board at Pune Jn</button>
         <button class="secondary" id="bContinue" style="display:none">Continue</button>
+        <button class="secondary" id="bInstall" style="display:none">Install on this phone</button>
       </div>
       <p class="tnote">Prototype. Each leg takes about five minutes. Turn the sound on.</p>
     </div>
@@ -337,10 +343,10 @@ button:focus-visible{outline:2px solid var(--board);outline-offset:2px}
   </div></div>
 </div></div>
 
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js"}}</script>
+<script type="importmap">{"imports":{"three":"./lib/three.module.js"}}</script>
 <script type="module">
 import * as THREE from 'three';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from './lib/jsm/loaders/GLTFLoader.js';
 window.THREE=THREE; window.GLTFLoader=GLTFLoader; window.dispatchEvent(new Event('three-ready'));
 </script>
 <script>
@@ -2325,6 +2331,12 @@ fit(); $('#gl').style.display='none';
 function boot3D(){ if(G3.ok||!window.THREE) return; if(init3D()){ $('#gl').style.display=''; if(S.leg){ try{ build3DLeg(S.leg); }catch(e){ console.error(e); G3.ok=false; $('#gl').style.display='none'; } } } }
 if(window.THREE) boot3D(); else addEventListener('three-ready',boot3D);
 updDesk(); ticker.set(defaultTicker()); requestAnimationFrame(frame);
+</script>
+<script>
+if('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+let deferredInstall=null; addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredInstall=e; const b=document.getElementById('bInstall'); if(b) b.style.display=''; });
+document.addEventListener('DOMContentLoaded',()=>{ const b=document.getElementById('bInstall'); if(!b) return; b.onclick=async()=>{ if(!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall=null; b.style.display='none'; }; });
+document.getElementById('bStart').addEventListener('click',()=>{ try{ if(!matchMedia('(display-mode: fullscreen)').matches&&document.documentElement.requestFullscreen) document.documentElement.requestFullscreen({navigationUI:'hide'}).then(()=>screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})).catch(()=>{}); }catch(e){} },{capture:true});
 </script>
 </body>
 </html>
