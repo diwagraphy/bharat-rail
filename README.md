@@ -1,6 +1,6 @@
 # Bharat Rail: Pune–Darbhanga Express
 
-A playable prototype of an Indian Railways game: drive train 11033 in a WAP-7 from Pune to Darbhanga and look after twelve coaches of passengers.
+A playable prototype of an Indian Railways game: drive train 11033 behind a WDP-4D diesel from Pune to Darbhanga and look after twelve coaches of passengers.
 
 **Play:** https://diwagraphy.github.io/bharat-rail/
 
