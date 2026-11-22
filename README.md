@@ -1,6 +1,6 @@
 # Bharat Rail: Pune–Darbhanga Express
 
-A playable prototype of an Indian Railways game: drive train 11033 behind a WDP-4D diesel from Pune to Darbhanga and look after twelve coaches of passengers.
+A playable prototype of an Indian Railways game: drive train 11033 behind a WAP-4 electric from Pune to Darbhanga and look after twelve coaches of passengers.
 
 **Play:** https://diwagraphy.github.io/bharat-rail/
 
@@ -14,3 +14,8 @@ A playable prototype of an Indian Railways game: drive train 11033 behind a WDP-
 - `lib/` — Three.js r149 and its glTF loader (MIT licence, see `lib/THREE-LICENSE.txt`).
 - `fonts/` — Barlow Condensed, Hind, Yatra One, DotGothic16 (SIL Open Font Licence).
 - `sw.js`, `manifest.webmanifest`, `icons/` — offline cache and home-screen app setup. Bump `VERSION` in `sw.js` when you change files so phones pick up the update.
+
+## Photo credits
+The locomotive, coach and ballast textures are cut from photos on [Pexels](https://www.pexels.com) (free to use and modify under the Pexels licence):
+- WAP-4 22252 — Naveen Sharma
+- LHB coaches and ballast — Shantum Singh

@@ -1,7 +1,7 @@
 // Offline cache for Bharat Rail. Bump VERSION when files change so phones pick up the update.
-const VERSION='bharat-rail-v6';
+const VERSION='bharat-rail-v7';
 self.__FONTS=['./fonts/barlow-condensed-latin-400-normal.woff2','./fonts/barlow-condensed-latin-500-normal.woff2','./fonts/barlow-condensed-latin-600-normal.woff2','./fonts/barlow-condensed-latin-700-normal.woff2','./fonts/dotgothic16-latin-400-normal.woff2','./fonts/hind-devanagari-400-normal.woff2','./fonts/hind-devanagari-500-normal.woff2','./fonts/hind-devanagari-600-normal.woff2','./fonts/hind-devanagari-700-normal.woff2','./fonts/hind-latin-400-normal.woff2','./fonts/hind-latin-500-normal.woff2','./fonts/hind-latin-600-normal.woff2','./fonts/hind-latin-700-normal.woff2','./fonts/yatra-one-devanagari-400-normal.woff2','./fonts/yatra-one-latin-400-normal.woff2'];
-const FILES=['./','./index.html','./manifest.webmanifest','./fonts.css','./lib/three.module.js','./lib/jsm/loaders/GLTFLoader.js','./lib/jsm/utils/BufferGeometryUtils.js','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/apple-touch-icon.png'];
+const FILES=['./','./index.html','./manifest.webmanifest','./fonts.css','./lib/three.module.js','./lib/jsm/loaders/GLTFLoader.js','./lib/jsm/utils/BufferGeometryUtils.js','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/apple-touch-icon.png','./tex/wap4_nose.jpg','./tex/wap4_side.jpg','./tex/lhb_side.jpg','./tex/lhb_night.jpg','./tex/ballast.jpg'];
 self.addEventListener('install',e=>{ e.waitUntil(caches.open(VERSION).then(c=>c.addAll(FILES.concat(self.__FONTS||[]))).then(()=>self.skipWaiting())); });
 self.addEventListener('activate',e=>{ e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim())); });
 self.addEventListener('fetch',e=>{ if(e.request.method!=='GET') return;
